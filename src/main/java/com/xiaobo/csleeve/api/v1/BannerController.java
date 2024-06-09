@@ -20,6 +20,6 @@ public class BannerController {
     @GetMapping("/test")
     public String test() throws Exception {
         iSkill.R();
-        throw new ForbiddenException(403);
+        throw new ForbiddenException(10001);
     }
 }
