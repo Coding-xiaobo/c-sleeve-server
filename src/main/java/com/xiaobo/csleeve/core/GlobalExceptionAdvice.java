@@ -1,10 +1,8 @@
 package com.xiaobo.csleeve.core;
 
 import com.xiaobo.csleeve.Exception.http.HttpException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,14 +14,18 @@ public class GlobalExceptionAdvice {
     //处理未知异常
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
+    @ResponseStatus(code= HttpStatus.INTERNAL_SERVER_ERROR)
     public UnifyResponse handleException(HttpServletRequest req, Exception e) {
+        String requestUrl = req.getRequestURI();
+        String method = req.getMethod();
+        System.out.println(e);
         //未知异常code码统一设置为9999
-        UnifyResponse msg = new UnifyResponse(9999,"服务器异常", "URL");
+        UnifyResponse msg = new UnifyResponse(9999,"服务器异常", method+" "+requestUrl);
         return msg;
     }
     //处理已知异常
-//    @ExceptionHandler(HttpException.class)
-//    public void handleHttpException(HttpServletRequest req, HttpException e) {
-//        System.out.println("hello");
-//    }
+    @ExceptionHandler(HttpException.class)
+    public void handleHttpException(HttpServletRequest req, HttpException e) {
+        System.out.println("hello");
+    }
 }

@@ -18,6 +18,6 @@ public class BannerController {
     @GetMapping("/test")
     public String test() throws Exception {
         iSkill.R();
-        throw new NotFoundException(10001);
+        throw new RuntimeException("123123");
     }
 }
