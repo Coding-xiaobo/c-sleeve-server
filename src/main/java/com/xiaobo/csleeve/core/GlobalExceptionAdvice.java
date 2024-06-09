@@ -1,7 +1,10 @@
 package com.xiaobo.csleeve.core;
 
 import com.xiaobo.csleeve.Exception.http.HttpException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +28,16 @@ public class GlobalExceptionAdvice {
     }
     //处理已知异常
     @ExceptionHandler(HttpException.class)
-    public void handleHttpException(HttpServletRequest req, HttpException e) {
-        System.out.println("hello");
+    public ResponseEntity<UnifyResponse> handleHttpException(HttpServletRequest req, HttpException e) {
+        String requestUrl = req.getRequestURI();
+        String method = req.getMethod();
+        UnifyResponse msg = new UnifyResponse(e.getCode(), "xxxx", method+" "+requestUrl);
+        //headers是为了设置返回的类型
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        //httpStatus
+        HttpStatus status = HttpStatus.resolve(e.getCode());
+        ResponseEntity<UnifyResponse> r = new ResponseEntity<>(msg, headers, status);
+        return r;
     }
 }

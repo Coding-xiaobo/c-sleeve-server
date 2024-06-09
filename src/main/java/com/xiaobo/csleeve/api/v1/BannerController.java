@@ -1,5 +1,7 @@
 package com.xiaobo.csleeve.api.v1;
 
+import com.xiaobo.csleeve.Exception.http.ForbiddenException;
+import com.xiaobo.csleeve.Exception.http.HttpException;
 import com.xiaobo.csleeve.Exception.http.NotFoundException;
 import com.xiaobo.csleeve.sample.IConnect;
 import com.xiaobo.csleeve.sample.ISkill;
@@ -18,6 +20,6 @@ public class BannerController {
     @GetMapping("/test")
     public String test() throws Exception {
         iSkill.R();
-        throw new RuntimeException("123123");
+        throw new ForbiddenException(403);
     }
 }
