@@ -17,9 +17,10 @@ public class BannerController {
     private IConnect iConnect;
 
     @GetMapping("/test")
-    public String test() {
+    public String test() throws Exception {
         iSkill.R();
-        return "Hello Xiaobo";
+        throw new Exception("这里错了");
+//        return "Hello Xiaobo";
     }
 
     @GetMapping("/mysql")
