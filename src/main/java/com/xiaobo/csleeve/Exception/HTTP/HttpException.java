@@ -1,4 +1,4 @@
-package com.xiaobo.csleeve.Exception.HTTP;
+package com.xiaobo.csleeve.Exception.http;
 
 public class HttpException extends RuntimeException{
     protected Integer code;
