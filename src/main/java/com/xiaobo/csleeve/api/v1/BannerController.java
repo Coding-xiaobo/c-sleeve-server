@@ -6,9 +6,6 @@ import com.xiaobo.csleeve.sample.ISkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
-
 @RestController
 @RequestMapping("/banner")
 public class BannerController {
@@ -16,10 +13,14 @@ public class BannerController {
     private ISkill iSkill;
 
     @PostMapping("/test/{id}")
-    public String test(@PathVariable Integer id, @RequestParam String name, @RequestBody PersonDTO person) throws Exception {
+    public PersonDTO test(@PathVariable Integer id, @RequestParam String name, @RequestBody PersonDTO person) throws Exception {
         System.out.println(id);
         System.out.println(name);
-        iSkill.R();
-        throw new ForbiddenException(10000);
+        //使用builder就不可以new实例化了
+        //PersonDTO dto1 = new PersonDTO();
+        PersonDTO dto = PersonDTO.builder().name("xiaobo").age(18).build();
+        return dto;
+//        iSkill.R();
+//        throw new ForbiddenException(10000);
     }
 }
