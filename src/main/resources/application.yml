@@ -1,0 +1,5 @@
+server:
+  port: 8081
+
+csleeve:
+  api-package: com.xiaobo.csleeve.api
