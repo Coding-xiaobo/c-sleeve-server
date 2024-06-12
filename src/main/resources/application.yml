@@ -1,3 +1,6 @@
 # 生产环境/开发环境都有效
+spring:
+  profiles:
+    active: dev
 csleeve:
   api-package: com.xiaobo.csleeve.api
