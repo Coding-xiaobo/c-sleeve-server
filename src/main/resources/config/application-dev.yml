@@ -1,3 +1,9 @@
 # 只在开发环境有效
 server:
   port: 8081
+
+spring:
+  datasource:
+    url:  jdbc:mysql://localhost:3307/sleeve?characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: root
